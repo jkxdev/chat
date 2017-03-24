@@ -108,7 +108,7 @@ class CustomWebSocketHandler<E> implements Handler<E> {
 		System.out.println("CustomWebSocketHandler.handle() ws = "+ws);		
 		////
 		String idKey = "id";
-		String tokenKey = "authToken";
+		String tokenKey = "tok";
 		String query = ws.query();
 		System.out.println("CustomWebSocketHandler.handle() query = "+query);		
 		if(!query.contains(idKey))	{
@@ -139,8 +139,8 @@ class CustomWebSocketHandler<E> implements Handler<E> {
 	public void postMsgForAuthentication(String userId, String userToken) {
 
 		Hashtable<String, Object> table = new Hashtable<String, Object>();
-		table.put("userId", userId);
-		table.put("userToken", userToken);
+		table.put("name", userId);
+		table.put("tok", userToken);
 		
 		JsonObject authJsonData =  new JsonObject(table);
 		
@@ -231,7 +231,7 @@ class BufferHandler<E> implements Handler<E>	{
 
 		message = ((Buffer)event).toString();
 		counter++;
-		ChatVerticle.publishMessageToClients(" MsgNumber: "+counter+" "+message);
+		ChatVerticle.publishMessageToClients(" " + message);
 	}
 	
 }
